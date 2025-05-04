@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lokesh Sharma - Data Science & AI Engineer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a192f;
+            --secondary: #112240;
+            --highlight: #64ffda;
+            --text: #8892b0;
+            --heading: #ccd6f6;
+            --white: #e6f1ff;
+            --header-height: 80px; /* Define header height for positioning */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: rgba(10, 25, 47, 0.85);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: var(--header-height); /* Use variable */
+            padding: 0 50px; /* Adjusted padding */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--highlight);
+            z-index: 1001; /* Ensure logo is above mobile menu background */
+        }
+
+        /* --- Navbar Styles --- */
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            color: var(--heading);
+            text-decoration: none;
+            font-size: 16px;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s ease; /* Smooth color transition */
+        }
+
+        nav ul li a:hover {
+            color: var(--highlight);
+        }
+
+        nav ul li a::before {
+            content: "";
+            position: absolute;
+            bottom: -2px; /* Adjusted position slightly */
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--highlight);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::before {
+            width: 100%;
+        }
+
+        /* --- Hamburger Menu --- */
+        .menu-toggle {
+            display: none; /* Hidden by default */
+            background: none;
+            border: none;
+            color: var(--highlight);
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1001; /* Ensure toggle is clickable */
+        }
+
+        /* --- General Styles --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 50px;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        /* Corrected Hero Padding */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            /* margin-top removed, use padding-top relative to header */
+            padding-top: var(--header-height); /* Start content below fixed header */
+        }
+
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .subtitle {
+            color: var(--highlight);
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 60px;
+            color: var(--heading);
+            margin-bottom: 10px;
+            line-height: 1.1;
+        }
+
+        h2 {
+            font-size: 50px;
+            color: var(--text);
+            margin-bottom: 30px;
+        }
+
+        .description {
+            font-size: 18px;
+            max-width: 540px;
+            margin-bottom: 50px;
+        }
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap; /* ensures responsiveness */
+        }
+
+        .btn {
+            display: inline-flex; /* Use inline-flex for alignment */
+            align-items: center; /* Vertically center text/icon */
+            justify-content: center; /* Horizontally center text/icon */
+            background: transparent;
+            color: var(--highlight);
+            border: 1px solid var(--highlight);
+            padding: 15px 30px;
+            font-size: 16px;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-align: center; /* Ensure text is centered */
+        }
+
+        .btn i { /* Style for icon inside button */
+             margin-right: 8px;
+        }
+
+        .btn:hover {
+            background-color: rgba(100, 255, 218, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .section-title {
+            font-size: 28px;
+            color: var(--heading);
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60%;
+            height: 2px;
+            background-color: var(--highlight);
+        }
+
+        /* --- About Section --- */
+        .about-content {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 50px; /* Added gap for spacing */
+        }
+
+        .about-text {
+            flex: 1;
+           /* margin-right removed, use gap */
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+        }
+
+        .skills {
+            flex: 1;
+            max-width: 400px; /* Optional: Constrain skills width */
+        }
+
+        .skills-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .skills-list li {
+            list-style: none;
+            position: relative;
+            padding-left: 20px;
+            font-size: 16px;
+        }
+
+        .skills-list li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--highlight);
+        }
+
+        /* --- Card Styles --- */
+        .experience-card, .project-card, .education-card {
+            background-color: var(--secondary);
+            padding: 30px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added shadow transition */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+        }
+
+        .experience-card:hover, .project-card:hover, .education-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+        }
+
+        .card-title {
+            color: var(--heading);
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .company {
+            color: var(--highlight);
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .date {
+            font-size: 14px;
+            margin-bottom: 20px;
+            color: var(--text); /* Ensure date color */
+        }
+
+        .job-description ul, .project-description ul {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .job-description li, .project-description li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .job-description li::before, .project-description li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--highlight);
+        }
+
+        /* --- Projects Grid --- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* Slightly smaller min */
+            gap: 30px;
+        }
+
+        .project-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%; /* Ensure cards in a row have same height */
+        }
+
+        .project-title {
+            font-size: 22px;
+            color: var(--heading);
+            margin-bottom: 15px;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px; /* Use gap for spacing */
+            margin-top: auto; /* Push tech tags to the bottom */
+            padding-top: 15px; /* Add some space above tags */
+            margin-bottom: 0; /* Remove bottom margin */
+        }
+
+        .project-tech span {
+            background-color: rgba(100, 255, 218, 0.1);
+            color: var(--highlight);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 14px;
+           /* margin-right and margin-bottom removed, use gap */
+        }
+
+        /* --- Education Section --- */
+        #education .card-title { /* Style specifically for education card title */
+             margin-bottom: 5px;
+        }
+         #education .company { /* Style specifically for institution */
+             margin-bottom: 5px;
+             font-size: 16px; /* Slightly smaller */
+        }
+         #education .date {
+             margin-bottom: 15px;
+        }
+        #education p { /* General paragraph styling in education */
+            margin-bottom: 10px;
+        }
+
+        .relevant-coursework-title {
+            color: var(--heading);
+            margin-bottom: 10px;
+            font-size: 16px; /* Adjust size */
+            font-weight: bold;
+        }
+
+        .coursework-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 0; /* Remove default ul padding */
+            margin: 0; /* Remove default ul margin */
+        }
+
+        .coursework-list li {
+            background-color: rgba(100, 255, 218, 0.1);
+            color: var(--highlight);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 14px;
+        }
+
+        .certifications-title {
+             color: var(--heading);
+             margin-bottom: 20px;
+             font-size: 18px; /* Adjust size */
+             font-weight: bold;
+        }
+
+         .certifications-list {
+            list-style: none;
+            padding: 0; /* Remove default ul padding */
+            margin: 0; /* Remove default ul margin */
+         }
+         .certifications-list li {
+            margin-bottom: 10px;
+            display: flex; /* Align icon and text */
+            align-items: center;
+            font-size: 15px; /* Adjust text size */
+         }
+         .certifications-list li i {
+             color: var(--highlight);
+             margin-right: 10px;
+             width: 1em; /* Ensure consistent icon spacing */
+             text-align: center;
+         }
+         .certifications-list li:last-child {
+             margin-bottom: 0; /* Remove margin from last item */
+         }
+
+        /* --- Contact Section --- */
+        .contact {
+            text-align: center;
+        }
+
+        .contact-heading {
+            font-size: 50px;
+            color: var(--heading);
+            margin-bottom: 20px;
+        }
+
+        .contact-text {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            align-items: center; /* Vertically align icons */
+            flex-wrap: wrap; /* Allow icons to wrap on small screens */
+            gap: 20px; /* Use gap for spacing */
+            margin-top: 30px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px; /* Slightly smaller */
+            height: 45px; /* Slightly smaller */
+            border-radius: 50%;
+            background-color: var(--secondary);
+           /* margin removed, use gap */
+            color: var(--highlight);
+            font-size: 20px; /* Slightly smaller */
+            text-decoration: none; /* Remove underline */
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            transform: translateY(-5px);
+            background-color: rgba(100, 255, 218, 0.1);
+        }
+
+        /* --- Footer --- */
+        footer {
+            padding: 20px 0;
+            text-align: center;
+            font-size: 14px;
+            border-top: 1px solid var(--secondary); /* Add a subtle separator */
+            margin-top: 50px; /* Space above footer */
+        }
+
+        /* --- Media Queries for Responsiveness --- */
+        @media (max-width: 768px) {
+            header {
+              padding: 0 20px;
+            }
+
+            /* .navcontainer {
+              padding-right: 80px;
+            } */
+            .container {
+                padding: 0 20px;
+            }
+
+        .menu-toggle {
+          display: block;
+          position: relative;
+          margin-left: 80px;
+          z-index: 1001;
+        }
+
+        nav {
+          position: relative;
+        }
+
+        .nav-links {
+          display: none;
+          flex-direction: column;
+          position: absolute;
+          top: 55px;
+          right: 10px; /* Adjust this value to position menu from right edge */
+          padding: 10px;
+          border-radius: 6px;
+          z-index: 1000;
+          min-width: 100px;
+          
+        }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-links li {
+    margin: 4px 0;
+  }
+
+  .nav-links li a {
+    color: white;
+    font-size: 14px;
+    text-decoration: none;
+    padding: 5px 10px;
+  }
+
+  nav ul {
+    display: none;
+    position: absolute;
+    top: var(--header-height);
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    background-color: var(--secondary);
+    padding: 20px 0;
+    border-top: 1px solid var(--highlight);
+    z-index: 999;
+  }
+
+  nav ul.active {
+    display: flex;
+    z-index: 999;
+  }
+
+  nav ul li {
+    margin-left: 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  nav ul li a {
+    padding: 15px 20px;
+    display: block;
+    width: 100%;
+  }
+
+  nav ul li a::before {
+    display: none;
+  }
+
+  nav ul li a:hover {
+    background-color: rgba(100, 255, 218, 0.1);
+    color: var(--highlight);
+  }
+
+  /* Hero Section Adjustments */
+  h1 {
+    font-size: 40px;
+  }
+
+  h2 {
+    font-size: 30px;
+  }
+
+  .description {
+    font-size: 16px;
+  }
+
+  /* About Section */
+  .about-content {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .about-text {
+    margin-right: 0;
+    margin-bottom: 0;
+  }
+
+  .skills {
+    max-width: 100%;
+  }
+
+  .skills-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Projects */
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .project-card {
+    padding: 25px;
+  }
+
+  /* Contact Section */
+  .contact-heading {
+    font-size: 36px;
+  }
+
+  .contact-text {
+    font-size: 16px;
+  }
+
+  .social-icons {
+    gap: 15px;
+  }
+
+  .social-icons a {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  /* General Section Padding */
+  section {
+    padding: 80px 0;
+  }
+
+  .hero {
+    padding-top: calc(var(--header-height) + 20px);
+    min-height: auto;
+    padding-bottom: 80px;
+  }
+}
+
+
+         @media (max-width: 480px) {
+             h1 { font-size: 32px; }
+             h2 { font-size: 24px; }
+             .section-title { font-size: 24px; }
+             .contact-heading { font-size: 30px; }
+             .btn { padding: 12px 25px; font-size: 15px; }
+             .skills-list { grid-template-columns: 1fr; } /* Single column skills on very small screens */
+         }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">LS</div>
+      
+        
+        <nav>
+            <div class="navcontainer">
+              
+                <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#education">Education</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+        
+         <!-- Menu Toggle Button is now the LAST element -->
+        
+    </header>
+
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <p class="subtitle">Hi, my name is</p>
+                <h1>Lokesh Sharma.</h1>
+                <h2>I build AI-powered solutions.</h2>
+                <p class="description">
+                    I'm a software engineer specializing in data science and AI development.
+                    Currently focused on building intelligent applications with LLMs, NLP, and machine learning technologies.
+                </p>
+                <div class="button-group">
+                    <a href="#contact" class="btn">Get In Touch</a>
+                    <a href="https://drive.google.com/file/d/1V1CLtHnR4Iv1gmKpj7-fjCq5my8vZjI8/view?usp=drive_link"
+                       class="btn"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                       <i class="fas fa-download"></i> Download Resume
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h3 class="section-title">About Me</h3>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        Hello! I'm Lokesh, a software engineer and Python developer with expertise in machine learning, deep learning, and natural language processing.
+                        I graduated from the Indian Institute of Information Technology, Una with a Bachelor of Technology in Electronics and Communication Engineering.
+                    </p>
+                    <p>
+                        My professional journey includes working with AI-powered applications, developing Retrieval-Augmented Generation (RAG) systems, and implementing LLM solutions for various business needs.
+                        I'm passionate about leveraging data science to solve real-world problems and create innovative applications.
+                    </p>
+                </div>
+                <div class="skills">
+                    <h4 style="color: var(--heading); margin-bottom: 20px; font-size: 18px;">Skills & Technologies</h4>
+                    <ul class="skills-list">
+                        <li>Python</li><li>SQL</li>
+                        <li>FastAPI</li><li>PyTorch</li>
+                        <li>LangChain</li><li>LlamaIndex</li>
+                        <li>Langgraph</li><li>MLflow</li>
+                        <li>ChromaDB</li><li>FaissDB</li>
+                        <li>Open source LLMs</li><li>NumPy & Pandas</li>
+                        <li>TensorFlow & Keras</li><li>OpenCV</li>
+                        <li>scikit-learn</li><li>Data Visualization</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="container">
+            <h3 class="section-title">Work Experience</h3>
+            <div class="experience-card">
+                <h4 class="card-title">Software Engineer</h4>
+                <p class="company">Sphinx WorldBiz Limited</p>
+                <p class="date">June 2024 - Present</p>
+                <div class="job-description">
+                    <ul>
+                        <li>Developing and maintaining AI-powered applications and systems.</li>
+                        <li>Developed a Legal Compliance RAG application using web scraping and vector databases for efficient context retrieval.</li>
+                        <li>Designed and developed a Python backend for a mobile app with AI-driven dream analysis and goal tracking.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="experience-card">
+                <h4 class="card-title">Python Developer</h4>
+                <p class="company">Sphinx WorldBiz Limited</p>
+                <p class="date">January 2023 - May 2024</p>
+                <div class="job-description">
+                    <ul>
+                        <li>Developed a Kafka-based live-streaming process POC for a security system, enabling real-time monitoring and alerts.</li>
+                        <li>Developed an LLM-powered resume parser API, enhancing accuracy and efficiency in resume data extraction.</li>
+                        <li>Utilized natural language processing (NLP) techniques to interpret user queries and dynamically generate SQL queries.</li>
+                        <li>Implemented a resume scoring system using LLMs to rank and evaluate resumes based on specific job criteria.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <h3 class="section-title">Featured Projects</h3>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h4 class="project-title">Legal Compliance RAG System</h4>
+                    <p class="project-description">A Retrieval-Augmented Generation application for legal compliance that uses web scraping to collect relevant legal data and implements a vector database for efficient context retrieval and response generation.</p>
+                    <div class="project-tech">
+                        <span>Python</span><span>LangChain</span><span>Vector DB</span><span>LLMs</span><span>Web Scraping</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h4 class="project-title">LLM-Powered Resume Parser</h4>
+                    <p class="project-description">An advanced resume parsing system using Large Language Models to accurately extract and structure information from resumes in various formats.</p>
+                    <div class="project-tech">
+                        <span>Python</span><span>NLP</span><span>LLMs</span><span>FastAPI</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h4 class="project-title">Face Recognition Attendance</h4>
+                    <p class="project-description">Created a dataset of 11,000 images and trained a Deep Learning model using CNNs to recognize faces and automatically mark attendance in an Excel sheet using webcam footage.</p>
+                    <div class="project-tech">
+                        <span>Python</span><span>OpenCV</span><span>Deep Learning</span><span>CNNs</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h4 class="project-title">Movie Recommendation System</h4>
+                    <p class="project-description">Developed a movie recommendation system using the cosine similarity algorithm, with extensive data analysis and visualizations to provide personalized movie recommendations.</p>
+                    <div class="project-tech">
+                        <span>Python</span><span>ML</span><span>Data Analysis</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h4 class="project-title">Patient Condition Classification</h4>
+                    <p class="project-description">Developed a system that categorizes patients' conditions based on their drug reviews, implementing TF-IDF technique to extract text features for accurate classification.</p>
+                    <div class="project-tech">
+                        <span>Python</span><span>NLP</span><span>TF-IDF</span><span>Classification</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h4 class="project-title">Unmanned Ground Vehicle</h4>
+                    <p class="project-description">Developed an Autonomous UGV for disaster management with obstacle detection, human identification, and location reporting capabilities.</p>
+                    <div class="project-tech">
+                        <span>Python</span><span>Deep Learning</span><span>CV</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education">
+        <div class="container">
+            <h3 class="section-title">Education</h3>
+            <div class="education-card">
+                <h4 class="card-title">Bachelor of Technology</h4>
+                <p class="company">Indian Institute of Information Technology, Una</p>
+                <p class="date">December 2020 - May 2024</p>
+                <p>Electronics and Communication Engineering</p>
+                <!-- <p>Electronics and Communication Engineering | CGPA: 8.13</p> -->
+                <div style="margin-top: 20px;">
+                    <h5 class="relevant-coursework-title">Relevant Coursework</h5>
+                    <ul class="coursework-list">
+                        <li>Machine Learning</li>
+                        <li>Deep Learning</li>
+                        <li>Natural Language Processing</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="margin-top: 40px;">
+                <h4 class="certifications-title">Certifications</h4>
+                <div class="education-card">
+                     <ul class="certifications-list">
+                        <li><i class="fas fa-certificate"></i>Udemy - Data Science and Machine Learning using Python</li>
+                        <li><i class="fas fa-certificate"></i>Coursera - Supervised Machine Learning: Regression & Classification</li>
+                        <li><i class="fas fa-certificate"></i>Coursera - Exploratory Data Analysis for Machine Learning</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" style="padding-bottom: 80px;"> <!-- Added padding bottom -->
+        <div class="container">
+            <h3 class="contact-heading">Get In Touch</h3>
+            <p class="contact-text">
+                I am currently seeking new opportunities where I can contribute my skills and grow professionally. Feel free to reach out to connect.
+            </p>
+            <a href="mailto:lokeshiiitu@gmail.com" class="btn" style="margin-bottom: 40px;">Interested in working together?</a>
+
+            <div class="social-icons">
+                <a href="https://www.linkedin.com/in/lokesh-sharma9783" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/lokesh074" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile"><i class="fab fa-github"></i></a>
+                <a href="mailto:lokeshiiitu@gmail.com" aria-label="Send Email"><i class="far fa-envelope"></i></a>
+                <a href="tel:+919783596594" aria-label="Call Phone"><i class="fas fa-phone"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>Designed & Built by Lokesh Sharma © 2025</p> <!-- Updated year -->
+        </div>
+    </footer>
+      
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetElement = document.querySelector(this.getAttribute('href'));
+                    if (targetElement) {
+                        const headerOffset = document.querySelector('header').offsetHeight;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+    
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        const navUl = document.querySelector('nav ul');
+    
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const isOpen = navUl.classList.contains('active');
+            const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
+            menuToggle.setAttribute('aria-expanded', !expanded);
+        
+                        // Change icon
+        if (isOpen) {
+                menuToggle.innerHTML = '<i class="fas fa-times"></i>';
+                } 
+                else {
+                    menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            });
+    
+         
+            document.querySelectorAll('nav ul li a').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    navUl.classList.remove('active');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                    menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+    
+            // Close menu when clicking outside
+            document.addEventListener('click', function(event) {
+                const isNavClick = navUl.contains(event.target);
+                const isToggleClick = menuToggle.contains(event.target);
+                if (!isNavClick && !isToggleClick && navUl.classList.contains('open')) {
+                    navUl.classList.remove('open');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                    menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+<!-- done -->
